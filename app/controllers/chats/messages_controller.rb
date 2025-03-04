@@ -9,6 +9,6 @@ class Chats::MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:chats_message).permit(:content)
+    params.require(:chats_message).permit(data: [:role, :content])
   end
 end
