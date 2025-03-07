@@ -1,26 +1,12 @@
-<div class="container mx-auto px-4 py-8 max-w-4xl">
+<div class="container mx-auto px-4 py-8 max-w-4xl" data-controller="chat">
   <div class="bg-white rounded-lg shadow-lg p-6">
     <!-- Chat history container -->
     <div class="mb-4 h-[500px] overflow-y-auto border rounded-lg p-4" 
-         data-controller="chat"
          data-chat-target="messageContainer">
       <!-- Messages will be added here dynamically -->
-      <div class="space-y-4">
-        <% @chat.messages.each do |message| %>
-          <% if message.data["role"] == "user" %>
-            <div class="flex items-start">
-              <div class="bg-gray-100 rounded-lg px-4 py-2 max-w-[80%]">
-                <p class="text-gray-800"><%= message.data["content"] %></p>
-              </div>
-            </div>
-          <% elsif message.data["role"] == "assistant" %>
-            <div class="flex items-start justify-end">
-              <div class="bg-blue-500 text-white rounded-lg px-4 py-2 max-w-[80%]">
-                <p class="text-white"><%= message.data["content"] %></p>
-              </div>
-            </div>
-          <% end %>
-        <% end %>
+      <%= turbo_stream_from @chat, "messages" %>
+      <div id="messages" class="space-y-4">
+        <%= render @chat.messages %>
       </div>
     </div>
 

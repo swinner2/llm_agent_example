@@ -1,0 +1,15 @@
+<div data-controller="scroll-into-view">
+  <% if message.data["role"] == "assistant" %>
+    <div class="flex items-start">
+      <div class="bg-gray-100 rounded-lg px-4 py-2 max-w-[80%]">
+        <p class="text-gray-800 prose"><%= simple_format(message.data["content"]) %></p>
+      </div>
+    </div>
+  <% elsif message.data["role"] == "user" %>
+    <div class="flex items-start justify-end">
+      <div class="bg-blue-500 text-white rounded-lg px-4 py-2 max-w-[80%]">
+        <p class="text-white prose"><%= simple_format(message.data["content"]) %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
