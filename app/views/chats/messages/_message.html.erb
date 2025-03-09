@@ -1,5 +1,5 @@
 <div data-controller="scroll-into-view">
-  <% if message.data["role"] == "assistant" %>
+  <% if message.data["role"] == "assistant" && message.data["tool_calls"].blank? %>
     <div class="flex items-start">
       <div class="bg-gray-100 rounded-lg px-4 py-2 max-w-[80%]">
         <p class="text-gray-800 prose"><%= message.data["content"].html_safe %></p>
