@@ -1,8 +1,3 @@
-OpenAI.configure do |config|
-  config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN")
-  config.log_errors = true
-end
-
 RubyLLM.configure do |config|
   config.openai_api_key = ENV.fetch("OPENAI_ACCESS_TOKEN")
   # Uncomment these lines if you want to use other providers

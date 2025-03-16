@@ -1,0 +1,2 @@
+app/views/messages/_typing.html.erb did not exist in docs
+app/views/messages/_message.html.erb did not exist in docs

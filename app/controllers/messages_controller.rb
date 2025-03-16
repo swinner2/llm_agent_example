@@ -1,6 +1,5 @@
-class Chats::MessagesController < ApplicationController
+class MessagesController < ApplicationController
   def create
-    @chat = Chat.find(params[:chat_id])
     @message = @chat.messages.create!(message_params)
     
     render json: {}, status: :created

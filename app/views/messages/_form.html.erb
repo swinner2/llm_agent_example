@@ -1,0 +1,5 @@
+<%= form_with url: ask_chat_path(message.chat), class: "flex gap-2" do |form| %>
+  <%= form.text_area :message, class: "flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500", data: {chat_target: "input", action: "keydown.enter->chat#sendMessage"} %>
+
+  <%= form.submit "Send", class: "bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors" %>
+<% end %>
