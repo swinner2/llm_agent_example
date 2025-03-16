@@ -1,7 +1,5 @@
 class Chat < ApplicationRecord
   acts_as_chat
-  
-  # broadcasts_to ->(chat) { "chat_#{chat.id}" }
 
   def system_prompt
     current_time = Time.current.strftime("%Y-%m-%d %H:%M:%S")
