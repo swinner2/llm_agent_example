@@ -4,17 +4,22 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem "sqlite3"
 #
-default: &default
+sqlite: &sqlite
   adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+postgresql: &postgresql
+  adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   primary:
-    <<: *default
-    database: storage/development.sqlite3
+    <<: *postgresql
+    database: llm_agent_example_development
   cable:
-    <<: *default
+    <<: *sqlite
     database: storage/development_cable.sqlite3
     migrations_paths: db/cable_migrate
 
@@ -22,25 +27,24 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  <<: *sqlite
   database: storage/test.sqlite3
-
 
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
   primary:
-    <<: *default
+    <<: *sqlite
     database: storage/production.sqlite3
   cache:
-    <<: *default
+    <<: *sqlite
     database: storage/production_cache.sqlite3
     migrations_paths: db/cache_migrate
   queue:
-    <<: *default
+    <<: *sqlite
     database: storage/production_queue.sqlite3
     migrations_paths: db/queue_migrate
   cable:
-    <<: *default
+    <<: *sqlite
     database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate

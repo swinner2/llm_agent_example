@@ -10,9 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_13_203604) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_19_024421) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+  enable_extension "vector"
+
   create_table "chats", force: :cascade do |t|
     t.string "model_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "imdb_movies", force: :cascade do |t|
+    t.integer "movie_id"
+    t.string "title"
+    t.string "genres"
+    t.text "description"
+    t.string "director"
+    t.string "cast"
+    t.integer "year"
+    t.integer "runtime"
+    t.float "rating"
+    t.integer "votes"
+    t.decimal "revenue"
+    t.integer "metascore"
+    t.vector "embedding"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
