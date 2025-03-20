@@ -1,7 +1,7 @@
 <div class="flex items-start mb-4">
   <div class="bg-gray-100 rounded-lg px-4 py-2 max-w-[80%]">
     <% if message.content.present? %>
-      <p class="text-gray-800 prose"><%= message.content.html_safe %></p>
+      <div class="text-gray-800 prose"><%= markdown_to_html(message.content) %></div>
     <% elsif message.tool_call? %>
       <p class="text-gray-800">Running tool call: <%= message.tool_calls.first.name %></p>
     <% else %>
