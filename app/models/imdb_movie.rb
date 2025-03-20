@@ -2,13 +2,13 @@ class ImdbMovie < ApplicationRecord
   has_neighbors :embedding
 
   # Search movies by similarity
-  def self.semantic_search(query, limit: 10)
+  def self.semantic_search(query)
     embedding = RubyLLM.embed(query)
     nearest_neighbors(:embedding, embedding.vectors, distance: :cosine)
   end
 
   # Search by traditional filters combined with semantic search
-  def self.advanced_search(query:, year: nil, min_rating: nil, limit: 10)
+  def self.advanced_search(query:, year: nil, min_rating: nil)
     scope = all
 
     # Apply traditional filters

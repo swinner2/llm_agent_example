@@ -7,7 +7,20 @@ class MovieSearch < RubyLLM::Tool
     required: true
 
   def execute(query:)
-    ImdbMovie.semantic_search(query).first(5)
+    ImdbMovie.semantic_search(query).first(3).map do |movie|
+      {
+        title: movie.title,
+        genres: movie.genres,
+        year: movie.year,
+        rating: movie.rating,
+        description: movie.description,
+        director: movie.director,
+        cast: movie.cast,
+        votes: movie.votes,
+        revenue: movie.revenue,
+        metascore: movie.metascore,
+      }
+    end
   rescue => e
     { error: e.message }
   end
